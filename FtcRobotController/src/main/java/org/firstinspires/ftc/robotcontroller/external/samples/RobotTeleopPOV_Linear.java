@@ -56,10 +56,10 @@ public class RobotTeleopPOV_Linear extends LinearOpMode {
         // To drive forward, most robots need the motor on one side to be reversed, because the axles point in opposite directions.
         // Pushing the left stick forward MUST make robot go forward. So adjust these two lines based on your first test drive.
         // Note: The settings here assume direct drive on left and right wheels.  Gear Reduction or 90 Deg drives may require direction flips
-        frontleftDrive.setDirection(DcMotor.Direction.REVERSE);
-        backleftDrive.setDirection(DcMotor.Direction.REVERSE);
-        frontrightDrive.setDirection(DcMotor.Direction.FORWARD);
-        backrightDrive.setDirection(DcMotor.Direction.FORWARD);
+        frontleftWheel.setDirection(DcMotor.Direction.REVERSE);
+        backleftWheel.setDirection(DcMotor.Direction.REVERSE);
+        frontrightWheel.setDirection(DcMotor.Direction.FORWARD);
+        backrightWheel.setDirection(DcMotor.Direction.FORWARD);
 
         // If there are encoders connected, switch to RUN_USING_ENCODER mode for greater accuracy
         // robot.leftDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -79,13 +79,15 @@ public class RobotTeleopPOV_Linear extends LinearOpMode {
             max = Math.max(Math.abs(left), Math.abs(right));
             if (max > 1.0)
             {
-                left /= max;
-                right /= max;
+                frontleft /= max;
+                frontright /= max;
+                backleft /= max;
+                backright /= max;
             }
 
             // Output the safe vales to the motor drives.
-            leftDrive.setPower(left);
-            rightDrive.setPower(right);
+            frontleftDrive.setPower(frontleft);
+            frontrightDrive.setPower(right);
 
         }
     }
