@@ -40,29 +40,29 @@ import com.qualcomm.robotcore.util.Range;
 public class RobotTeleopPOV_Linear extends LinearOpMode {
 
     /* Declare OpMode members. */
-    public DcMotor  frontleftWheel  = null;
-    public DcMotor  rearrightWheel  = null;
-    public DcMotor  frontrightWheel  = null;
-    public DcMotor  rearleftWheel  = null;
+    public DcMotor  frontLeft  = null;
+    public DcMotor  rearRight  = null;
+    public DcMotor  frontRight  = null;
+    public DcMotor  rearLeft  = null;
     public DcMotor  leftintakeWheel  = null;
     public DcMotor  rearrightWheel  = null;
 
     
         // Define and Initialize Motors
-        frontleftWheel  = hardwareMap.get(DcMotor.class, "front_left_wheel");
-        rearleftWheel  = hardwareMap.get(DcMotor.class, "rear_left_wheel");
-        frontrightWheel = hardwareMap.get(DcMotor.class, "front_right_wheel");
-        rearrightWheel = hardwareMap.get(DcMotor.class, "rear_right_wheel");
+        frontLeft  = hardwareMap.get(DcMotor.class, "front_left_wheel");
+        rearLeft  = hardwareMap.get(DcMotor.class, "rear_left_wheel");
+        frontRight = hardwareMap.get(DcMotor.class, "front_right_wheel");
+        rearRight = hardwareMap.get(DcMotor.class, "rear_right_wheel");
     
         leftintakeWheel = hardwareMap.get(DcMotor.class, "left_intake_wheel");
         rightintakeWheel = hardwareMap.get(DcMotor.class, "right_intake_wheel");
     
 
         // Reversing the motors
-        frontleftWheel.setDirection(DcMotor.Direction.REVERSE);
-        rearleftWheel.setDirection(DcMotor.Direction.REVERSE);
-        frontrightWheel.setDirection(DcMotor.Direction.FORWARD);
-        rearrightWheel.setDirection(DcMotor.Direction.FORWARD);
+        frontLeft.setDirection(DcMotor.Direction.REVERSE);
+        rearLeft.setDirection(DcMotor.Direction.REVERSE);
+        frontRight.setDirection(DcMotor.Direction.FORWARD);
+        rearRight.setDirection(DcMotor.Direction.FORWARD);
     
         leftintakeWheel.setDirection(DcMotor.Direction.FORWARD);
         rightintakeWheel.setDirection(DcMotor.Direction.REVERSE);
@@ -91,10 +91,10 @@ public class RobotTeleopPOV_Linear extends LinearOpMode {
             }
 
             // Output the safe vales to the motor wheels.
-            frontleftWheel.setPower(frontleft);
-            frontrightWheel.setPower(frontright);
-            rearleftWheel.setPower(rearleft);
-            rearrightWheel.setPower(rearright);
+            frontLeft.setPower(frontleft);
+            frontRight.setPower(frontright);
+            rearLeft.setPower(rearleft);
+            rearRight.setPower(rearright);
 
             // Gamepad controls
             double r = Math.hypot(gamepad1.left_stick_x, gamepad1.left_stick_y);
