@@ -108,7 +108,7 @@ public class RobotTeleopPOV_Linear extends LinearOpMode {
             rearrightWheel.setPower(v4);
             
             /*-------INTAKE-------*/
-            
+            if (gamepad1
             
         }
     }
