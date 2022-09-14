@@ -41,10 +41,13 @@ public class RobotTeleopPOV_Linear extends LinearOpMode {
 
     /* Declare OpMode members. */
     public DcMotor  frontleftWheel  = null;
-    public DcMotor  backrightWheel  = null;
+    public DcMotor  rearrightWheel  = null;
     public DcMotor  frontrightWheel  = null;
-    public DcMotor  backleftWheel  = null;
+    public DcMotor  rearleftWheel  = null;
+    public DcMotor  leftintakeWheel  = null;
+    public DcMotor  rearrightWheel  = null;
 
+    
         // Define and Initialize Motors
         frontleftWheel  = hardwareMap.get(DcMotor.class, "front_left_wheel");
         rearleftWheel  = hardwareMap.get(DcMotor.class, "rear_left_wheel");
@@ -108,7 +111,23 @@ public class RobotTeleopPOV_Linear extends LinearOpMode {
             rearrightWheel.setPower(v4);
             
             /*-------INTAKE-------*/
-            if (gamepad1
+            if (gamepad1.left_bumper)
+            {
+                leftintakewheel.setPower(1)
+                rightintakewheel.setPower(1)
+                }
+            if else
+            {
+                leftintakewheel.setPower(-1)
+                rightintakewheel.setPower(-1)
+                }
+            else
+            {
+                leftintakewheel.setPower(0)
+                rightintakewheel.setPower(0)
+                }
+                        
+                
             
         }
     }
