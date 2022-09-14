@@ -35,7 +35,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.Range;
 
-@TeleOp(name="Robot: Teleop POV", group="Robot")
+@TeleOp(name="Robot: Teleop", group="Robot")
 @Disabled
 public class RobotTeleopPOV_Linear extends LinearOpMode {
 
@@ -45,23 +45,18 @@ public class RobotTeleopPOV_Linear extends LinearOpMode {
     public DcMotor  frontrightWheel  = null;
     public DcMotor  backleftWheel  = null;
 
-    double clawOffset = 0;
-
         // Define and Initialize Motors
         frontleftWheel  = hardwareMap.get(DcMotor.class, "front_left_wheel");
         rearleftWheel  = hardwareMap.get(DcMotor.class, "rear_left_wheel");
         frontrightWheel = hardwareMap.get(DcMotor.class, "front_right_wheel");
         rearrightWheel = hardwareMap.get(DcMotor.class, "rear_right_wheel");
+    
 
         // Reversing the motors
         frontleftWheel.setDirection(DcMotor.Direction.REVERSE);
         rearleftWheel.setDirection(DcMotor.Direction.REVERSE);
         frontrightWheel.setDirection(DcMotor.Direction.FORWARD);
         rearrightWheel.setDirection(DcMotor.Direction.FORWARD);
-
-        // If there are encoders connected, switch to RUN_USING_ENCODER mode for greater accuracy
-        // robot.leftDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        // robot.rightDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         // Send telemetry message to signify robot waiting;
         telemetry.addData("Say", "Hello Driver");    //
@@ -73,6 +68,8 @@ public class RobotTeleopPOV_Linear extends LinearOpMode {
         // run until the end of the match (driver presses STOP)
         while (opModeIsActive()) {
 
+            /*-------Drivetrain-------*/
+            
             // Normalize the values so neither exceed +/- 1.0
             max = Math.max(Math.abs(left), Math.abs(right));
             if (max > 1.0)
@@ -98,10 +95,13 @@ public class RobotTeleopPOV_Linear extends LinearOpMode {
             final double v3 = r * Math.sin(robotAngle) + rightX;
             final double v4 = r * Math.cos(robotAngle) - rightX;
 
-            frontleft.setPower(v1);
-            frontright.setPower(v2);
-            rearleft.setPower(v3);
-            rearright.setPower(v4);
+            frontleftWheel.setPower(v1);
+            frontrightWheel.setPower(v2);
+            rearleftWheel.setPower(v3);
+            rearrightWheel.setPower(v4);
+            
+            /*-------INTAKE-------*/
+            
         }
     }
 }
