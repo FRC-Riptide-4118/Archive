@@ -105,10 +105,10 @@ public class RobotTeleopPOV_Linear extends LinearOpMode {
             final double v3 = r * Math.sin(robotAngle) + rightX;
             final double v4 = r * Math.cos(robotAngle) - rightX;
 
-            frontleftWheel.setPower(v1);
-            frontrightWheel.setPower(v2);
-            rearleftWheel.setPower(v3);
-            rearrightWheel.setPower(v4);
+            frontLeft.setPower(v1);
+            frontRight.setPower(v2);
+            rearLeft.setPower(v3);
+            rearRight.setPower(v4);
             
             /*-------INTAKE-------*/
             if (gamepad1.left_bumper)
