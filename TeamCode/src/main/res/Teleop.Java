@@ -116,7 +116,7 @@ public class RobotTeleopPOV_Linear extends LinearOpMode {
                 leftintakewheel.setPower(1)
                 rightintakewheel.setPower(1)
                 }
-            if else
+            if else (gamepad1.right_bumper)
             {
                 leftintakewheel.setPower(-1)
                 rightintakewheel.setPower(-1)
