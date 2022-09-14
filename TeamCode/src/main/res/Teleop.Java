@@ -51,12 +51,19 @@ public class RobotTeleopPOV_Linear extends LinearOpMode {
         frontrightWheel = hardwareMap.get(DcMotor.class, "front_right_wheel");
         rearrightWheel = hardwareMap.get(DcMotor.class, "rear_right_wheel");
     
+        leftintakeWheel = hardwareMap.get(DcMotor.class, "left_intake_wheel");
+        rightintakeWheel = hardwareMap.get(DcMotor.class, "right_intake_wheel");
+    
 
         // Reversing the motors
         frontleftWheel.setDirection(DcMotor.Direction.REVERSE);
         rearleftWheel.setDirection(DcMotor.Direction.REVERSE);
         frontrightWheel.setDirection(DcMotor.Direction.FORWARD);
         rearrightWheel.setDirection(DcMotor.Direction.FORWARD);
+    
+        leftintakeWheel.setDirection(DcMotor.Direction.FORWARD);
+        rightintakeWheel.setDirection(DcMotor.Direction.REVERSE);
+    
 
         // Send telemetry message to signify robot waiting;
         telemetry.addData("Say", "Hello Driver");    //
@@ -101,6 +108,7 @@ public class RobotTeleopPOV_Linear extends LinearOpMode {
             rearrightWheel.setPower(v4);
             
             /*-------INTAKE-------*/
+            
             
         }
     }
