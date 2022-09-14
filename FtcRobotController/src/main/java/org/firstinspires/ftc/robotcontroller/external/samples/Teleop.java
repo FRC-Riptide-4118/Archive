@@ -49,17 +49,15 @@ public class RobotTeleopPOV_Linear extends LinearOpMode {
 
         // Define and Initialize Motors
         frontleftWheel  = hardwareMap.get(DcMotor.class, "front_left_wheel");
-        backleftWheel  = hardwareMap.get(DcMotor.class, "back_left_wheel");
+        rearleftWheel  = hardwareMap.get(DcMotor.class, "rear_left_wheel");
         frontrightWheel = hardwareMap.get(DcMotor.class, "front_right_wheel");
-        backrightWheel = hardwareMap.get(DcMotor.class, "back_right_wheel");
+        rearrightWheel = hardwareMap.get(DcMotor.class, "rear_right_wheel");
 
-        // To drive forward, most robots need the motor on one side to be reversed, because the axles point in opposite directions.
-        // Pushing the left stick forward MUST make robot go forward. So adjust these two lines based on your first test drive.
-        // Note: The settings here assume direct drive on left and right wheels.  Gear Reduction or 90 Deg drives may require direction flips
+        // Reversing the motors
         frontleftWheel.setDirection(DcMotor.Direction.REVERSE);
-        backleftWheel.setDirection(DcMotor.Direction.REVERSE);
+        rearleftWheel.setDirection(DcMotor.Direction.REVERSE);
         frontrightWheel.setDirection(DcMotor.Direction.FORWARD);
-        backrightWheel.setDirection(DcMotor.Direction.FORWARD);
+        rearrightWheel.setDirection(DcMotor.Direction.FORWARD);
 
         // If there are encoders connected, switch to RUN_USING_ENCODER mode for greater accuracy
         // robot.leftDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -81,14 +79,29 @@ public class RobotTeleopPOV_Linear extends LinearOpMode {
             {
                 frontleft /= max;
                 frontright /= max;
-                backleft /= max;
-                backright /= max;
+                rearleft /= max;
+                rearright /= max;
             }
 
-            // Output the safe vales to the motor drives.
-            frontleftDrive.setPower(frontleft);
-            frontrightDrive.setPower(right);
+            // Output the safe vales to the motor wheels.
+            frontleftWheel.setPower(frontleft);
+            frontrightWheel.setPower(frontright);
+            rearleftWheel.setPower(rearleft);
+            rearrightWheel.setPower(rearright);
 
+            // Gamepad controls
+            double r = Math.hypot(gamepad1.left_stick_x, gamepad1.left_stick_y);
+            double robotAngle = Math.atan2(gamepad1.left_stick_y, gamepad1.left_stick_x) - Math.PI / 4;
+            double rightX = gamepad1.right_stick_x;
+            final double v1 = r * Math.cos(robotAngle) + rightX;
+            final double v2 = r * Math.sin(robotAngle) - rightX;
+            final double v3 = r * Math.sin(robotAngle) + rightX;
+            final double v4 = r * Math.cos(robotAngle) - rightX;
+
+            frontleft.setPower(v1);
+            frontright.setPower(v2);
+            rearleft.setPower(v3);
+            rearright.setPower(v4);
         }
     }
 }
