@@ -44,8 +44,8 @@ public class RobotTeleopPOV_Linear extends LinearOpMode {
     public DcMotor  rearRight  = null;
     public DcMotor  frontRight  = null;
     public DcMotor  rearLeft  = null;
-    public DcMotor  leftintakeWheel  = null;
-    public DcMotor  rearrightWheel  = null;
+    public Servo  gripper  = null;
+   
 
     
         // Define and Initialize Motors
@@ -54,8 +54,8 @@ public class RobotTeleopPOV_Linear extends LinearOpMode {
         frontRight = hardwareMap.get(DcMotor.class, "front_right_wheel");
         rearRight = hardwareMap.get(DcMotor.class, "rear_right_wheel");
     
-        leftintakeWheel = hardwareMap.get(DcMotor.class, "left_intake_wheel");
-        rightintakeWheel = hardwareMap.get(DcMotor.class, "right_intake_wheel");
+        gripper = hardwareMap.get(Servo.class, "gripper");
+        
     
 
         // Reversing the motors
@@ -64,8 +64,10 @@ public class RobotTeleopPOV_Linear extends LinearOpMode {
         frontRight.setDirection(DcMotor.Direction.FORWARD);
         rearRight.setDirection(DcMotor.Direction.FORWARD);
     
-        leftintakeWheel.setDirection(DcMotor.Direction.FORWARD);
-        rightintakeWheel.setDirection(DcMotor.Direction.REVERSE);
+        Servo.setDirection(Servo.Direction.FORWARD);
+    
+      
+      
     
 
         // Send telemetry message to signify robot waiting;
@@ -113,18 +115,18 @@ public class RobotTeleopPOV_Linear extends LinearOpMode {
             /*-------INTAKE-------*/
             if (gamepad1.left_bumper)
             {
-                leftintakewheel.setPower(.5)
-                rightintakewheel.setPower(.5)
+                gripper.setPosition(.5)
+                    
                 }
             if else (gamepad1.right_bumper)
             {
-                leftintakewheel.setPower(-.5)
-                rightintakewheel.setPower(-.5)
+                gripper.setPosition(-.5)
+                    
                 }
             else
             {
-                leftintakewheel.setPower(0)
-                rightintakewheel.setPower(0)
+                gripper.setPosition(0)
+                    
                 }
                         
                 
