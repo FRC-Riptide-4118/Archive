@@ -67,8 +67,10 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 public class RobotAutoDriveByEncoder_Linear extends LinearOpMode {
 
     /* Declare OpMode members. */
-    private DcMotor         leftDrive   = null;
-    private DcMotor         rightDrive  = null;
+    private DcMotor  frontLeft  = null;
+    private DcMotor  rearRight  = null;
+    private DcMotor  frontRight  = null;
+    private DcMotor  rearLeft  = null;
 
     private ElapsedTime     runtime = new ElapsedTime();
 
@@ -78,7 +80,7 @@ public class RobotAutoDriveByEncoder_Linear extends LinearOpMode {
     // For example, use a value of 2.0 for a 12-tooth spur gear driving a 24-tooth spur gear.
     // This is gearing DOWN for less speed and more torque.
     // For gearing UP, use a gear ratio less than 1.0. Note this will affect the direction of wheel rotation.
-    static final double     COUNTS_PER_MOTOR_REV    = 1440 ;    // eg: TETRIX Motor Encoder
+    static final double     COUNTS_PER_MOTOR_REV    = 537.7 ;    // eg: TETRIX Motor Encoder
     static final double     DRIVE_GEAR_REDUCTION    = 1.0 ;     // No External Gearing.
     static final double     WHEEL_DIAMETER_INCHES   = 4.0 ;     // For figuring circumference
     static final double     COUNTS_PER_INCH         = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) /
@@ -96,19 +98,27 @@ public class RobotAutoDriveByEncoder_Linear extends LinearOpMode {
         // To drive forward, most robots need the motor on one side to be reversed, because the axles point in opposite directions.
         // When run, this OpMode should start both motors driving forward. So adjust these two lines based on your first test drive.
         // Note: The settings here assume direct drive on left and right wheels.  Gear Reduction or 90 Deg drives may require direction flips
-        leftDrive.setDirection(DcMotor.Direction.REVERSE);
-        rightDrive.setDirection(DcMotor.Direction.FORWARD);
+        frontLeft.setDirection(DcMotor.Direction.REVERSE);
+        rearLeft.setDirection(DcMotor.Direction.REVERSE);
+        frontRight.setDirection(DcMotor.Direction.FORWARD);
+        rearRight.setDirection(DcMotor.Direction.FORWARD);
 
-        leftDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        rightDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        frontLeft.setDirection(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rearLeft.setDirection(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        frontRight.setDirection(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rearRight.setDirection(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-        leftDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        rightDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        frontLeft.setDirection(DcMotor.RunMode.RUN_USING_ENCODER);
+        rearLeft.setDirection(DcMotor.RunMode.RUN_USING_ENCODER);
+        frontRight.setDirection(DcMotor.RunMode.RUN_USING_ENCODER);
+        rearRight.setDirection(DcMotor.RunMode.RUN_USING_ENCODER);
 
         // Send telemetry message to indicate successful Encoder reset
-        telemetry.addData("Starting at",  "%7d :%7d",
-                          leftDrive.getCurrentPosition(),
-                          rightDrive.getCurrentPosition());
+        telemetry.addData("Starting at",  "%7d :%7d :%7d :%7d",
+                          frontLeft.getCurrentPosition();
+                          rearLeft.getCurrentPosition();
+                          rearRight.getCurrentPosition();
+                          frontRight.getCurrentPosition();
         telemetry.update();
 
         // Wait for the game to start (driver presses PLAY)
