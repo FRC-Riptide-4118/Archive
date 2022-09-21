@@ -48,12 +48,6 @@ import static java.lang.Math.PI;
  *  This code ALSO requires that the drive Motors have been configured such that a positive
  *  power command moves them forward, and causes the encoders to count UP.
  *
- *   The desired path in this example is:
- *   - Drive forward for 48 inches
- *   - Spin right for 12 Inches
- *   - Drive Backward for 24 inches
- *   - Stop and close the claw.
- *
  *  The code is written using a method called: encoderDrive(speed, leftInches, rightInches, timeoutS)
  *  that performs the actual movement.
  *  This method assumes that each movement is relative to the last stopping place.
@@ -94,33 +88,35 @@ public class RobotAutoDriveByEncoder_Linear extends LinearOpMode {
     public void runOpMode() {
 
         // Initialize the drive system variables.
-        leftDrive  = hardwareMap.get(DcMotor.class, "left_drive");
-        rightDrive = hardwareMap.get(DcMotor.class, "right_drive");
+        frontLeftDrive  = hardwareMap.get(DcMotor.class, "front_left_wheel");
+        rearLeftDrive  = hardwareMap.get(DcMotor.class, "rear_left_wheel");
+        frontRightDrive = hardwareMap.get(DcMotor.class, "front_right_wheel");
+        rearRightDrive = hardwareMap.get(DcMotor.class, "rear_right_wheel");
 
         // To drive forward, most robots need the motor on one side to be reversed, because the axles point in opposite directions.
         // When run, this OpMode should start both motors driving forward. So adjust these two lines based on your first test drive.
         // Note: The settings here assume direct drive on left and right wheels.  Gear Reduction or 90 Deg drives may require direction flips
-        frontLeft.setDirection(DcMotor.Direction.REVERSE);
-        rearLeft.setDirection(DcMotor.Direction.REVERSE);
-        frontRight.setDirection(DcMotor.Direction.FORWARD);
-        rearRight.setDirection(DcMotor.Direction.FORWARD);
+        frontLeftDrive.setDirection(DcMotor.Direction.REVERSE);
+        rearLeftDrive.setDirection(DcMotor.Direction.REVERSE);
+        frontRightDrive.setDirection(DcMotor.Direction.FORWARD);
+        rearRightDrive.setDirection(DcMotor.Direction.FORWARD);
 
-        frontLeft.setDirection(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        rearLeft.setDirection(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        frontRight.setDirection(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        rearRight.setDirection(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        frontLeftDrive.setDirection(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rearLeftDrive.setDirection(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        frontRightDrive.setDirection(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rearRightDrive.setDirection(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-        frontLeft.setDirection(DcMotor.RunMode.RUN_USING_ENCODER);
-        rearLeft.setDirection(DcMotor.RunMode.RUN_USING_ENCODER);
-        frontRight.setDirection(DcMotor.RunMode.RUN_USING_ENCODER);
-        rearRight.setDirection(DcMotor.RunMode.RUN_USING_ENCODER);
+        frontLeftDrive.setDirection(DcMotor.RunMode.RUN_USING_ENCODER);
+        rearLeftDrive.setDirection(DcMotor.RunMode.RUN_USING_ENCODER);
+        frontRightDrive.setDirection(DcMotor.RunMode.RUN_USING_ENCODER);
+        rearRightDrive.setDirection(DcMotor.RunMode.RUN_USING_ENCODER);
 
         // Send telemetry message to indicate successful Encoder reset
         telemetry.addData("Starting at",  "%7d :%7d :%7d :%7d",
-                          frontLeft.getCurrentPosition();
-                          rearLeft.getCurrentPosition();
-                          rearRight.getCurrentPosition();
-                          frontRight.getCurrentPosition();
+                          frontLeftDrive.getCurrentPosition();
+                          rearLeftDrive.getCurrentPosition();
+                          rearRightDrive.getCurrentPosition();
+                          frontRightDrive.getCurrentPosition();
         telemetry.update();
 
         // Wait for the game to start (driver presses PLAY)
@@ -128,7 +124,7 @@ public class RobotAutoDriveByEncoder_Linear extends LinearOpMode {
 
         // Step through each leg of the path,
         // Note: Reverse movement is obtained by setting a negative distance (not speed)
-        encoderDrive(DRIVE_SPEED,  36.5,  36.5, 36.5, 36.5, 5.0);  // S1: Forward 36.5 Inches with 5 Sec timeout
+        encoderDrive(DRIVE_SPEED, 36.5, 36.5, 36.5, 36.5, 5.0);  // S1: Forward 36.5 Inches with 5 Sec timeout
 
         telemetry.addData("Path", "Complete");
         telemetry.update();
