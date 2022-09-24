@@ -58,9 +58,9 @@ import static java.lang.Math.PI;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@Autonomous(name="Robot: Auto Drive By Encoder", group="Robot")
+@Autonomous(name="Robot: ParkingZone1", group="Robot")
 @Disabled
-public class RobotAutoDriveByEncoder_Linear extends LinearOpMode {
+public class ParkingZone1_Linear extends LinearOpMode {
 
     /* Declare OpMode members. */
     private DcMotor  frontLeft  = null;
@@ -101,15 +101,15 @@ public class RobotAutoDriveByEncoder_Linear extends LinearOpMode {
         frontRightDrive.setDirection(DcMotor.Direction.FORWARD);
         rearRightDrive.setDirection(DcMotor.Direction.FORWARD);
 
-        frontLeftDrive.setDirection(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        rearLeftDrive.setDirection(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        frontRightDrive.setDirection(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        rearRightDrive.setDirection(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        frontLeftDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rearLeftDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        frontRightDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rearRightDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-        frontLeftDrive.setDirection(DcMotor.RunMode.RUN_USING_ENCODER);
-        rearLeftDrive.setDirection(DcMotor.RunMode.RUN_USING_ENCODER);
-        frontRightDrive.setDirection(DcMotor.RunMode.RUN_USING_ENCODER);
-        rearRightDrive.setDirection(DcMotor.RunMode.RUN_USING_ENCODER);
+        frontLeftDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        rearLeftDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        frontRightDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        rearRightDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         // Send telemetry message to indicate successful Encoder reset
         telemetry.addData("Starting at",  "%7d :%7d :%7d :%7d",
@@ -122,9 +122,21 @@ public class RobotAutoDriveByEncoder_Linear extends LinearOpMode {
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
 
-        // Step through each leg of the path,
         // Note: Reverse movement is obtained by setting a negative distance (not speed)
         encoderDrive(DRIVE_SPEED, 36.5, 36.5, 36.5, 36.5, 5.0);  // S1: Forward 36.5 Inches with 5 Sec timeout
+                          
+        // Reset encoders after each step within the path
+                 
+        frontLeftDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rearLeftDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        frontRightDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rearRightDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+                          
+        //
+                          
+                          
+        encoderDrive(DRIVE_SPEED, 30, 30, 30, 30, 5.0);  // S1: Forward 36.5 Inches with 5 Sec timeout                  
+        
 
         telemetry.addData("Path", "Complete");
         telemetry.update();
