@@ -46,7 +46,6 @@ public class RobotTeleopPOV_Linear extends LinearOpMode {
     public DcMotor  rearLeft  = null;
     public Servo  gripper  = null;
    
-
     
         // Define and Initialize Motors
         frontLeft  = hardwareMap.get(DcMotor.class, "front_left_wheel");
