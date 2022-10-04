@@ -114,12 +114,12 @@ public class RobotTeleopPOV_Linear extends LinearOpMode {
             /*-------INTAKE-------*/
             if (gamepad1.left_bumper)
             {
-                gripper.setPosition(.5)
+                gripper.setPosition(1)
                     
                 }
             if else (gamepad1.right_bumper)
             {
-                gripper.setPosition(-.5)
+                gripper.setPosition(-1)
                     
                 }
             else
